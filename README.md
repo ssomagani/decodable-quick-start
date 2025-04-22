@@ -29,16 +29,16 @@ decodable-quick-start/
     └── docker-compose.yml              # Docker compose for local development
 ```
 
-## Getting Started
+## Prerequisites:
 
-Prerequisites - (a) Docker Daemon running, (b) Decodable CLI installed and logged in.
+* Running Docker Daemon
+* Decodable CLI installed and logged in.
+
+## Getting Started
 
 1. Clone this repository
 2. Copy `.env.template` to `.env` in both `decodable/` and `docker/` directories and fill in your credentials
-3. Follow the instructions in each component's README for specific setup steps
-
-### Quick Start
-1. Run `deploy.sh` in the project root
+3. Run `deploy.sh` in the project root
 
 ## Components
 
