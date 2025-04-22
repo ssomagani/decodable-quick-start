@@ -42,16 +42,3 @@ Contains declarative definitions for Decodable resources including connections, 
 
 ### Docker Resources
 Provides Docker configuration for local development environment.
-
-### Custom Pipeline Implementation
-Example Java project demonstrating how to develop and test custom pipelines using Decodable's SDK. 
-
-decodable/
-├── flink/
-│   ├── src/
-│   ├── target/
-│   ├── pom.xml
-│   ├── deploy.sh
-│   └── README.md
-└── pipelines/
-    └── flink-example.yaml 
