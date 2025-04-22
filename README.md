@@ -31,9 +31,14 @@ decodable-quick-start/
 
 ## Getting Started
 
+Prerequisites - (a) Docker Daemon running, (b) Decodable CLI installed and logged in.
+
 1. Clone this repository
 2. Copy `.env.template` to `.env` in both `decodable/` and `docker/` directories and fill in your credentials
 3. Follow the instructions in each component's README for specific setup steps
+
+### Quick Start
+1. Run `deploy.sh` in the project root
 
 ## Components
 
