@@ -37,7 +37,7 @@ decodable-quick-start/
 ## Getting Started
 
 1. Clone this repository
-2. Copy `.env.template` to `.env` in both `decodable/` and `docker/` directories and fill in your credentials
+2. Copy `.env.template` to `.env` in  `docker/` directories and fill in your credentials
 3. Run `deploy.sh` in the project root
 
 ## Components
