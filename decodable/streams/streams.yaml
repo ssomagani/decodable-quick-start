@@ -1,0 +1,38 @@
+---
+kind: stream
+metadata:
+    name: raw_stream
+    description: ""
+spec_version: v1
+spec:
+    schema_v2:
+        fields:
+            - kind: physical
+              name: value
+              type: STRING
+        constraints: {}
+    type: APPEND
+    properties:
+        partition.count: "1"
+        compaction.enable: "false"
+        properties.compression.type: zstd
+    is_auto_schema_evolving: false
+---
+kind: stream
+metadata:
+    name: test_output_stream
+    description: ""
+spec_version: v1
+spec:
+    schema_v2:
+        fields:
+            - kind: physical
+              name: value
+              type: STRING
+        constraints: {}
+    type: APPEND
+    properties:
+        partition.count: "1"
+        compaction.enable: "false"
+        properties.compression.type: zstd
+    is_auto_schema_evolving: false

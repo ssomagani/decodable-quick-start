@@ -1,0 +1,55 @@
+---
+services:
+  ngrok:
+    image: ngrok/ngrok:latest
+    container_name: ngrok
+    # Sign up for an ngrok account at https://dashboard.ngrok.com/signup
+    # Get your auth-token from https://dashboard.ngrok.com/get-started/your-authtoken
+    # and put it in the .env file
+    env_file:
+      - .env
+    command: tcp broker:9092 --log stdout --authtoken ${NGROK_AUTH_TOKEN}
+    ports:
+      - 4040:4040 # Web dashboard for ngrok
+  broker:
+    image: kafka-curl-jq:latest
+    container_name: broker
+    depends_on:
+      - ngrok
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: controller,broker
+      KAFKA_LISTENERS: DOCKER://:29092,NGROK://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: DOCKER://broker:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: DOCKER:PLAINTEXT,NGROK:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@broker:9093
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+    ports:
+      - "29092:29092"
+      - "9092:9092"
+      - "9093:9093"
+    entrypoint: 
+      - /bin/sh 
+      - -c 
+      - |
+        echo "Waiting for ngrok tunnel to be created"
+        while : ; do
+          curl_status=$$(curl -s -o /dev/null -w %{http_code} http://ngrok:4040/api/tunnels/command_line)
+          echo -e $$(date) "\tTunnels API HTTP state: " $$curl_status " (waiting for 200)"
+          if [ $$curl_status -eq 200 ] ; then
+            break
+          fi
+          sleep 5 
+        done
+        echo "ngrok tunnel is up"
+        NGROK_LISTENER=NGROK://$(curl -s  http://ngrok:4040/api/tunnels/command_line | jq '.["public_url"]' | awk -F[/:] '{print $4 ":" $5}' | sed 's/.$//')
+        echo $$NGROK_LISTENER
+        export KAFKA_ADVERTISED_LISTENERS="$$KAFKA_ADVERTISED_LISTENERS, $$NGROK_LISTENER"
+        echo "KAFKA_ADVERTISED_LISTENERS is set to " $$KAFKA_ADVERTISED_LISTENERS
+        /etc/kafka/docker/run

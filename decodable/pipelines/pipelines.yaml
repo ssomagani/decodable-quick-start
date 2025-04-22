@@ -1,0 +1,39 @@
+---
+kind: pipeline
+metadata:
+  name: flink-example
+  description: Flink example pipeline for word count
+  tags:
+    type: flink
+    example: true
+spec_version: v2
+spec:
+  type: JAVA
+  job_file_path: ../custom/target/flink-example-1.0-SNAPSHOT.jar
+  entry_class: co.decodable.example.DataStreamExample
+  properties:
+    flink_version: 1.19-java11
+  execution:
+    active: true
+    task_size: M
+    task_count: 1 
+---
+kind: pipeline
+metadata:
+  name: test-sql
+  description: SQL example pipeline for word count
+  tags:
+    type: flink
+    example: true
+spec_version: v2
+spec:
+  sql: |
+    INSERT INTO test_output_stream
+    SELECT *
+    FROM raw_stream
+  execution:
+    active: false
+    task_size: M
+    task_count: 1 
+    initial_start_positions:
+      raw_stream: earliest
