@@ -3,7 +3,7 @@
 This project provides a framework for quickly getting started with Decodable development using a local Kafka cluster. It includes:
 
 - Decodable resources defined using declarative syntax
-- Docker resources for local development
+- Docker resources for creating a local Kafka cluster for source and sink streams
 - Example Flink project for custom pipeline development
 
 ## Project Structure
