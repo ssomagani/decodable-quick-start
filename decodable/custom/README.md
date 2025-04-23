@@ -1,6 +1,6 @@
-# Flink Example Project
+# Decodable Java Custom Pipeline Project
 
-This project demonstrates how to develop and test custom pipelines using Decodable's SDK.
+This is an Java project demonstrates how to develop and test custom pipelines using Decodable's SDK.
 
 ## Project Structure
 
@@ -18,7 +18,7 @@ flink/
 
 ## Building the Project
 
-To build the project, run:
+To build this project alone, you can simply run:
 
 ```bash
 mvn clean package

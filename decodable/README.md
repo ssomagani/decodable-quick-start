@@ -2,7 +2,7 @@
 
 This folder contains the resources that can be deployed in your Decodable account. It includes:
 
-1. `/streams` contains the definition of two streams for input and output.
+1. `/streams` contains the definition of two streams - for input and output.
 
 2. `/connections` contains the definition of a Kafka source connection that connects to the local Kafka cluster that can be spun up by using the deploy.sh script under `../docker` This connection writes to the input topic defined in #1.
 
