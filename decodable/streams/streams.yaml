@@ -16,7 +16,6 @@ spec:
         partition.count: "1"
         compaction.enable: "false"
         properties.compression.type: zstd
-    is_auto_schema_evolving: false
 ---
 kind: stream
 metadata:
@@ -35,4 +34,3 @@ spec:
         partition.count: "1"
         compaction.enable: "false"
         properties.compression.type: zstd
-    is_auto_schema_evolving: false
