@@ -12,7 +12,7 @@ services:
     ports:
       - 4040:4040 # Web dashboard for ngrok
   broker:
-    image: kafka-curl-jq:latest
+    image: seetasomagani/kafka-curl-jq:latest
     container_name: broker
     depends_on:
       - ngrok
