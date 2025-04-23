@@ -5,7 +5,7 @@ This is an Java project demonstrates how to develop and test custom pipelines us
 ## Project Structure
 
 ```
-flink/
+custom/
 ├── src/
 │   ├── main/
 │   │   ├── java/                   # Java source code
