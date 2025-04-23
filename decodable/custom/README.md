@@ -36,17 +36,21 @@ mvn test
 
 ## Development
 
+Standalone
 1. Create your pipeline class in `src/main/java/co/decodable/example/`
 2. Write tests in `src/test/java/co/decodable/example/`
 3. Build and test locally
 4. Deploy to Decodable using the CLI or web interface
 
-## Example Pipeline
+Together with all Decodable resources
+1. `cd ..`
+2. `./deploy.sh`
+
+## DataStreamJob
 
 The example pipeline demonstrates:
-- Reading from a Decodable stream
+- Reading from a Decodable stream that was created using the declarative resource definition in `decodable/streams`
 - Processing data using Flink operators
-- Writing to a Decodable stream
+- Writing to a Decodable stream which was also created using the declarative resource definition in `decodable/streams`
 
-See `ExamplePipeline.java` for implementation details. 
 
