@@ -32,18 +32,18 @@ decodable-quick-start/
 ## Prerequisites:
 
 * Running Docker Daemon
-* Decodable CLI installed and logged in.
+* Decodable CLI installed and logged in
 
 ## Getting Started
 
 1. Clone this repository
-2. Copy `.env.template` to `.env` in  `docker/` directories and fill in your credentials
+2. Copy `.env.template` to `.env` in  `docker/`  and fill in your credentials
 3. Run `deploy.sh` in the project root
 
 ## Components
 
 ### Decodable Resources
-Contains declarative definitions for Decodable resources including connections, streams, and pipelines.
+Contains declarative definitions for Decodable resources including connections, streams, and pipelines
 
 ### Docker Resources
-Provides Docker configuration for local development environment.
+Provides Docker configuration for spinning up system dependencies quickly
