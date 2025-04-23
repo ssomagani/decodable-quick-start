@@ -1,0 +1,25 @@
+---
+kind: connection
+metadata:
+    name: test-local-kafka-delete
+    description: ""
+spec_version: v2
+spec:
+    connector: kafka
+    type: source
+    stream_mappings:
+        - stream_name: raw_stream
+          external_resource_specifier:
+            topic: test_topic
+    properties:
+        properties.auto.offset.reset: none
+        value.format: json
+        value.fields-include: ALL
+        bootstrap.servers: 6.tcp.ngrok.io:18898
+        parse-error-policy: FAIL
+        fail-on-missing-field: "true"
+    is_auto_schema_evolving: false
+    execution:
+        active: true
+        task_count: 1
+        task_size: M

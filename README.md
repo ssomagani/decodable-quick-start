@@ -1,6 +1,6 @@
 # Decodable Quick Start
 
-This project provides a framework for quickly getting started with Decodable development. It includes:
+This project provides a framework for quickly getting started with Decodable development using a local Kafka cluster. It includes:
 
 - Decodable resources defined using declarative syntax
 - Docker resources for local development

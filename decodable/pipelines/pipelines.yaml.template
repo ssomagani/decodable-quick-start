@@ -9,7 +9,7 @@ metadata:
 spec_version: v2
 spec:
   type: JAVA
-  job_file_path: /Users/seetasomagani/code/decodable-quick-start/decodable/custom/target/decodable-custom-jobs-0.3.jar
+  job_file_path: $JAR_FILE
   entry_class: co.decodable.example.DataStreamJob
   properties:
     flink_version: 1.19-java11
