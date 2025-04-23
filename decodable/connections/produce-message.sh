@@ -3,8 +3,12 @@
 # Exit on any error
 set -e
 
+# Get the NGROK_URL from environment variables
+NGROK_URL=$(docker exec broker curl -s http://ngrok:4040/api/tunnels/command_line | jq -r '.["public_url"]' | awk -F[/:] '{print $4 ":" $5}' | sed 's/.$//')
+
+echo "NGROK_URL: $NGROK_URL"
 # Kafka connection details from kafka-source.yaml
-BOOTSTRAP_SERVERS="2.tcp.ngrok.io:15495"
+BOOTSTRAP_SERVERS="$NGROK_URL"
 TOPIC="test_topic"
 
 # Check if kcat is installed
