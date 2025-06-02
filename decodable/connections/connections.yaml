@@ -15,7 +15,7 @@ spec:
         properties.auto.offset.reset: none
         value.format: json
         value.fields-include: ALL
-        bootstrap.servers: 6.tcp.ngrok.io:18898
+        bootstrap.servers: 2.tcp.ngrok.io:16085
         parse-error-policy: FAIL
         fail-on-missing-field: "true"
     is_auto_schema_evolving: false

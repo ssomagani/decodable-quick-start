@@ -14,7 +14,7 @@
 
 	<groupId>co.decodable.example</groupId>
 	<artifactId>decodable-custom-jobs</artifactId>
-	<version>0.662</version>
+	<version>0.3</version>
 	<packaging>jar</packaging>
 
 	<name>Decodable Pipeline SDK Example</name>
@@ -28,7 +28,6 @@
 		<decodable.pipeline.sdk.version>1.19.2-1.0.0.Beta8</decodable.pipeline.sdk.version>
 		<flink.version>1.19.2</flink.version>
 		<log4j.version>2.17.1</log4j.version>
-		<kafka.version>3.0.0-1.17</kafka.version>
 	</properties>
 
 	<dependencies>
@@ -49,46 +48,35 @@
     	</dependency>
 
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.36</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-streaming-java</artifactId>
 			<version>${flink.version}</version>
-			<scope>provided</scope>
+
 		</dependency>
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-table-api-java</artifactId>
 			<version>${flink.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-table-api-java-bridge</artifactId>
 			<version>${flink.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-table-planner_${scala.binary.version}</artifactId>
 			<version>${flink.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-table-common</artifactId>
 			<version>${flink.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-table-runtime</artifactId>
 			<version>${flink.version}</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -133,25 +121,17 @@
 			<version>${log4j.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- SLF4J API -->
 		<dependency>
-			<groupId>org.apache.flink</groupId>
-			<artifactId>flink-connector-base</artifactId>
-			<version>${flink.version}</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>2.0.9</version>
 		</dependency>
+		<!-- SLF4J Simple implementation -->
 		<dependency>
-			<groupId>org.apache.flink</groupId>
-			<artifactId>flink-connector-kafka</artifactId>
-			<version>${kafka.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.flink</groupId>
-			<artifactId>flink-java</artifactId>
-			<version>${flink.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.flink</groupId>
-			<artifactId>flink-json</artifactId>
-			<version>${flink.version}</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>2.0.9</version>
 		</dependency>
 	</dependencies>
 
@@ -178,10 +158,19 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
+							<filters>
+								<filter>
+									<artifact>*:*</artifact>
+									<excludes>
+										<exclude>META-INF/*.SF</exclude>
+										<exclude>META-INF/*.DSA</exclude>
+										<exclude>META-INF/*.RSA</exclude>
+									</excludes>
+								</filter>
+							</filters>
 							<artifactSet>
 								<excludes>
 									<exclude>org.apache.flink:flink-shaded-force-shading</exclude>
-									<exclude>org.slf4j:*</exclude>
 									<exclude>org.lz4:lz4-java</exclude>
 									<exclude>org.xerial.snappy:snappy-java</exclude>
 								</excludes>
@@ -192,8 +181,8 @@
 									<mainClass>co.decodable.example.DataStreamExample</mainClass>
 								</transformer>
 							</transformers>
-                            <shadedArtifactAttached>false</shadedArtifactAttached>
-                            <shadedClassifierName></shadedClassifierName>
+							<shadedArtifactAttached>false</shadedArtifactAttached>
+							<shadedClassifierName></shadedClassifierName>
 						</configuration>
 					</execution>
 				</executions>
